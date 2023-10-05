@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FILE="CoppeliaSim_Edu_V4_5_1_rev4_Ubuntu20_04.tar.xz"
+URL="https://www.coppeliarobotics.com/files/$FILE"
+
+if [ ! -f "/tmp/$FILE" ]; then
+  echo "Downloading $FILE"
+  wget -q --show-progress $URL -O "/tmp/$FILE"
+fi
+
+tar -xf "/tmp/$FILE" -C /tmp/
+mv /tmp/CoppeliaSim_Edu_V4_0_0_Ubuntu18_04 /opt/coppelia-sim-edu

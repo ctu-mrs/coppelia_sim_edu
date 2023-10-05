@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo ""
+echo "Removing Coppelia Sim EDU"
+
+rm -rf /opt/coppelia-sim-edu
