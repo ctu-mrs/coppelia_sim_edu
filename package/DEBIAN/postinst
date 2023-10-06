@@ -5,7 +5,7 @@ URL="https://www.coppeliarobotics.com/files/$FILE.tar.xz"
 
 if [ ! -f "/tmp/$FILE" ]; then
   echo "Downloading $FILE"
-  wget -q --show-progress $URL -O "/tmp/$FILE"
+  wget -q --show-progress $URL -O "/tmp/$FILE.tar.xz"
 fi
 
 tar -xf "/tmp/$FILE.tar.xz" -C /tmp/
