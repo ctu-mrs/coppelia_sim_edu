@@ -1,12 +1,12 @@
 #!/bin/bash
 
-FILE="CoppeliaSim_Edu_V4_5_1_rev4_Ubuntu20_04"
-URL="https://www.coppeliarobotics.com/files/$FILE.tar.xz"
+FILE="CoppeliaSim_Edu_V4_6_0_rev10_Ubuntu20_04"
+URL="https://www.coppeliarobotics.com/files/V4_6_0_rev10/${FILE}.tar.xz"
 
-if [ ! -f "/tmp/$FILE" ]; then
-  echo "Downloading $FILE"
-  wget -q --show-progress $URL -O "/tmp/$FILE.tar.xz"
+if [ ! -f "/tmp/${FILE}" ]; then
+  echo "Downloading ${FILE} from $URL"
+  wget -q --show-progress $URL -O "/tmp/${FILE}.tar.xz"
 fi
 
-tar -xf "/tmp/$FILE.tar.xz" -C /tmp/
+tar -xf "/tmp/${FILE}.tar.xz" -C /tmp/
 mv /tmp/$FILE /opt/coppelia-sim-edu

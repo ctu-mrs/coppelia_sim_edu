@@ -1,5 +1,5 @@
 Package: coppelia-sim-edu
-Version: 4.5.1
+Version: 4.6.0
 Architecture: all
 Maintainer: Tomas Baca <tomas.baca@fel.cvut.cz>
 Description: Automatic trigger for downloading Coppelia Simulator EDU
