@@ -1,7 +1,7 @@
 #!/bin/bash
 
-FILE="CoppeliaSim_Edu_V4_6_0_rev10_Ubuntu20_04"
-URL="https://www.coppeliarobotics.com/files/V4_6_0_rev10/${FILE}.tar.xz"
+FILE="CoppeliaSim_Edu_V4_6_0_rev14_Ubuntu20_04"
+URL="https://www.coppeliarobotics.com/files/V4_6_0_rev14/${FILE}.tar.xz"
 
 if [ ! -f "/tmp/${FILE}" ]; then
   echo "Downloading ${FILE} from $URL"
