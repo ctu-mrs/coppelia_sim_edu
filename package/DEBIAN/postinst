@@ -1,12 +1,20 @@
 #!/bin/bash
 
-FILE="CoppeliaSim_Edu_V4_6_0_rev14_Ubuntu20_04"
-URL="https://www.coppeliarobotics.com/files/V4_6_0_rev14/${FILE}.tar.xz"
+set -e
 
-if [ ! -f "/tmp/${FILE}" ]; then
-  echo "Downloading ${FILE} from $URL"
-  wget -q --show-progress $URL -O "/tmp/${FILE}.tar.xz"
-fi
+VERSION="V4_10_0_rev0"
+FILE="CoppeliaSim_Edu_${VERSION}_Ubuntu24_04.tar.xz"
 
-tar -xf "/tmp/${FILE}.tar.xz" -C /tmp/
-mv /tmp/$FILE /opt/coppelia-sim-edu
+case "$1" in
+  configure)
+    # -c resumes a download interrupted by a previous failed run
+    wget -c -q --show-progress "https://downloads.coppeliarobotics.com/${VERSION}/${FILE}" -O "/tmp/${FILE}"
+    rm -rf /opt/coppelia-sim-edu
+    mkdir /opt/coppelia-sim-edu
+    tar -xf "/tmp/${FILE}" -C /opt/coppelia-sim-edu --strip-components=1
+    rm "/tmp/${FILE}"
+    ;&
+  triggered) # mrs_msgs got updated, see triggers
+    coppelia-sim-build-ros2-plugin || echo "Building the simROS2 plugin failed, rerun 'sudo coppelia-sim-build-ros2-plugin'"
+    ;;
+esac

@@ -1,5 +1,6 @@
 Package: coppelia-sim-edu
-Version: 4.6.14
+Version: 4.10.0
 Architecture: all
+Depends: wget, xz-utils, g++, libboost-dev, xsltproc, ros-jazzy-ros-base, ros-jazzy-mrs-msgs, ros-jazzy-map-msgs, ros-jazzy-pendulum-msgs, ros-jazzy-example-interfaces
 Maintainer: Tomas Baca <tomas.baca@fel.cvut.cz>
 Description: Automatic trigger for downloading Coppelia Simulator EDU

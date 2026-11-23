@@ -1,0 +1,26 @@
+#!/bin/bash
+# Rebuild CoppeliaSim's simROS2 plugin with the MRS message interfaces and
+# install it into the CoppeliaSim directory.
+
+set -e
+
+export COPPELIASIM_ROOT_DIR=${COPPELIASIM_ROOT_DIR:-/opt/coppelia-sim-edu}
+WORKDIR=$(mktemp -d)
+trap 'rm -rf "$WORKDIR"' EXIT
+
+source /opt/ros/jazzy/setup.bash
+
+SRC=$WORKDIR/sim_ros2_interface
+cp -r "$COPPELIASIM_ROOT_DIR/programming/ros2_packages/sim_ros2_interface" "$SRC"
+
+for interface in \
+  rosgraph_msgs/msg/Clock \
+  sensor_msgs/msg/Imu \
+  mrs_msgs/msg/HwApi{Actuator,ControlGroup,AttitudeRate,Attitude,AccelerationHdgRate,VelocityHdgRate}Cmd; do
+  grep -qxF "$interface" "$SRC/meta/interfaces.txt" || echo "$interface" >> "$SRC/meta/interfaces.txt"
+done
+printf 'find_package(mrs_msgs REQUIRED)\nament_target_dependencies(simROS2 PUBLIC mrs_msgs)\n' >> "$SRC/CMakeLists.txt"
+
+cmake -S "$SRC" -B "$WORKDIR/build" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$WORKDIR/install"
+cmake --build "$WORKDIR/build" -j"$(nproc)"
+cmake --install "$WORKDIR/build"
