@@ -3,7 +3,10 @@ name: generic_package_build
 on:
 
   push:
-    branches: [ master ]
+    branches: [ ros2 ]
+
+    paths-ignore:
+      - '**/README.md'
 
   workflow_dispatch:
 
@@ -14,6 +17,7 @@ concurrency:
 jobs:
 
   build:
-    uses: ctu-mrs/ci_scripts/.github/workflows/generic_package_build.yml@master
+    # CoppeliaSim is not released for arm64 Linux
+    uses: ctu-mrs/ci_scripts/.github/workflows/generic_package_build_amd64.yml@ros2
     secrets:
       PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}

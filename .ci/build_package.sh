@@ -7,8 +7,10 @@ trap 'echo "$0: \"${last_command}\" command failed with exit code $?"' ERR
 
 echo "$0: building the package"
 
-VARIANT=$1
-ARTIFACTS_FOLDER=$2
+ARTIFACTS_FOLDER=$1
+BASE_IMAGE=$2
+
+[ -z $ARTIFACTS_FOLDER ] && ARTIFACTS_FOLDER=/tmp/artifacts
 
 sudo apt-get -y install dpkg-dev
 
